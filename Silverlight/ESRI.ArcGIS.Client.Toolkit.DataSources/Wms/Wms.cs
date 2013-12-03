@@ -63,7 +63,7 @@ namespace ESRI.ArcGIS.Client.Toolkit.DataSources
         /// <summary>
         /// Gets or sets a security token which is added which is added to all WMS requests.
         /// </summary>
-        public static string UrlToken { get; set; }
+        public string UrlToken { get; set; }
         
 		/// <summary>
 		/// Gets or sets the image format being used by the service.
@@ -189,7 +189,7 @@ namespace ESRI.ArcGIS.Client.Toolkit.DataSources
 			{
 				string wmsUrl = CreateUrl(Url,
 						string.Format("service=WMS&request=GetCapabilities&version={0}",
-						GetValidVersionNumber()));
+						    GetValidVersionNumber()));
 
 				WebClient client = new WebClient();
 #if !SILVERLIGHT || WINDOWS_PHONE
@@ -210,9 +210,9 @@ namespace ESRI.ArcGIS.Client.Toolkit.DataSources
 			else if (!url.EndsWith("&"))
 				sb.Append('&');
 			sb.Append(querystring);
-            if (!url.EndsWith("&"))
+/*            if (!url.EndsWith("&"))
                 sb.Append('&');
-		    sb.Append(UrlToken);
+		    sb.Append(urlToken);*/
 			return sb.ToString();
 		}
 
@@ -624,17 +624,21 @@ namespace ESRI.ArcGIS.Client.Toolkit.DataSources
 				mapURL.Append("?");
 			else if (!baseUrl.EndsWith("&"))
 				mapURL.Append("&");
-			mapURL.Append("SERVICE=WMS&REQUEST=GetMap");
-			mapURL.AppendFormat("&WIDTH={0}", width);
-			mapURL.AppendFormat("&HEIGHT={0}", height);
-			mapURL.AppendFormat("&FORMAT={0}", ImageFormat);
-			mapURL.AppendFormat("&LAYERS={0}", Layers == null ? "" : String.Join(",", Layers));
-			mapURL.Append("&STYLES=");
-			mapURL.AppendFormat("&BGCOLOR={0}", "0xFFFFFF");
-			mapURL.AppendFormat("&TRANSPARENT={0}", "TRUE");
-            
-			mapURL.AppendFormat("&VERSION={0}", GetValidVersionNumber());
-			//If one of the WebMercator codes, change to a WKID supported by the service
+
+		    mapURL.Append("SERVICE=WMS&REQUEST=GetMap");
+		    mapURL.AppendFormat("&WIDTH={0}", width);
+		    mapURL.AppendFormat("&HEIGHT={0}", height);
+		    mapURL.AppendFormat("&FORMAT={0}", ImageFormat);
+		    mapURL.AppendFormat("&LAYERS={0}", Layers == null ? "" : String.Join(",", Layers));
+		    mapURL.Append("&STYLES=");
+		    mapURL.AppendFormat("&BGCOLOR={0}", "0xFFFFFF");
+		    mapURL.AppendFormat("&TRANSPARENT={0}", "TRUE");
+
+		    mapURL.AppendFormat("&VERSION={0}", GetValidVersionNumber());
+		    
+            mapURL.Append("&" + UrlToken);
+
+		    //If one of the WebMercator codes, change to a WKID supported by the service
 			if (SupportedSpatialReferenceIDs != null &&
 				(extentWKID == 102100 || extentWKID == 102113 || extentWKID == 3857 || extentWKID == 900913))
 			{
