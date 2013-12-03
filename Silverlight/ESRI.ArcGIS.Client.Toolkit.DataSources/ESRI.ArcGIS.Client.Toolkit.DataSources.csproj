@@ -68,8 +68,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ESRI.ArcGIS.Client">
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
+      <HintPath>..\packages\ArcGISSilverlight-Core\ESRI.ArcGIS.Client.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations">
       <SpecificVersion>False</SpecificVersion>

@@ -68,8 +68,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ESRI.ArcGIS.Client">
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
+      <HintPath>..\packages\ArcGISSilverlight-Core\ESRI.ArcGIS.Client.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations">
       <SpecificVersion>False</SpecificVersion>
@@ -118,9 +117,9 @@
     <Compile Include="Editor\TemplatePicker.cs" />
     <Compile Include="FeatureDataForm\FeatureDataForm.cs" />
     <Compile Include="FeatureDataGrid\FeatureDataGrid.cs" />
-		<Compile Include="FeatureDataGrid\FeatureDataGrid.Silverlight.cs" >
-			<DependentUpon>FeatureDataGrid.cs</DependentUpon>
-		</Compile>
+    <Compile Include="FeatureDataGrid\FeatureDataGrid.Silverlight.cs">
+      <DependentUpon>FeatureDataGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Magnifier\Magnifier.xaml.cs">
       <DependentUpon>Magnifier.xaml</DependentUpon>
     </Compile>
