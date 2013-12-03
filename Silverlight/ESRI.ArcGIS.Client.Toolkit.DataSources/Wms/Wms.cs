@@ -47,6 +47,7 @@ namespace ESRI.ArcGIS.Client.Toolkit.DataSources
 		public WmsLayer() : base()
 		{
 			LayerList = new ObservableCollection<LayerInfo>();
+		    UrlToken = string.Empty;
 		}
 
 		#region Public Properties
@@ -59,6 +60,11 @@ namespace ESRI.ArcGIS.Client.Toolkit.DataSources
 		/// <value>The URL.</value>
 		public string Url { get; set; }
 
+        /// <summary>
+        /// Gets or sets a security token which is added which is added to all WMS requests.
+        /// </summary>
+        public static string UrlToken { get; set; }
+        
 		/// <summary>
 		/// Gets or sets the image format being used by the service.
 		/// </summary>
@@ -204,6 +210,9 @@ namespace ESRI.ArcGIS.Client.Toolkit.DataSources
 			else if (!url.EndsWith("&"))
 				sb.Append('&');
 			sb.Append(querystring);
+            if (!url.EndsWith("&"))
+                sb.Append('&');
+		    sb.Append(UrlToken);
 			return sb.ToString();
 		}
 
