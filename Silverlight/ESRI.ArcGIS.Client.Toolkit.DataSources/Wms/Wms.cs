@@ -487,7 +487,7 @@ namespace ESRI.ArcGIS.Client.Toolkit.DataSources
 #endif
 				}
 				var DCPType = (from c in GetMap.Descendants(XName.Get("DCPType", ns)) select c).First();
-				var HTTP = (from c in DCPType.Descendants(XName.Get("HTTP", ns)) select c).First();
+				var HTTP = (from c in DCPType.Descendants(XName.Get("HTTPS", ns)) select c).First();
                 var Get = (from c in HTTP.Descendants(XName.Get("Get", ns)) select c).First();
                 var OnlineResource = (from c in Get.Descendants(XName.Get("OnlineResource", ns)) select c).First();
                 var href = OnlineResource.Attribute(XName.Get("href", "http://www.w3.org/1999/xlink"));
